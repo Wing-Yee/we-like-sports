@@ -4,7 +4,7 @@ import json #for when we have real results
 import requests #for when we have real results
 from PIL import Image
 
-test_image = Image.open('wordcloudtest.jpg')
+test_image = Image.open('/Users/sun/we-like-sports/api/wordcloudtest.jpg')
 
 st.title("We Like Sports Recommendation")
 st.write("")

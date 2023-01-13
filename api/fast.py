@@ -39,31 +39,31 @@ def input():
 
 #https://medium.com/codex/streamlit-fastapi-%EF%B8%8F-the-ingredients-you-need-for-your-next-data-science-recipe-ffbeb5f76a92
 
-# @app.get("/predict")
-# def predict(sentiment: st.slider("Sentiment", 1,5,1),
-#             coverage: int,
-#             engagement: int):
+@app.get("/predict")
+def predict(sentiment: int,
+            coverage: int,
+            engagement: int):
 
-#     sentiment = st.slider("Sentiment", 1,5,1)
-#     coverage = st.slider("Coverage", 1,5,1)
-#     engagement = st.slider("Engagement", 1,5,1)
+    sentiment = st.slider("Sentiment", 1,5,1)
+    coverage = st.slider("Coverage", 1,5,1)
+    engagement = st.slider("Engagement", 1,5,1)
 
-#     #convert params into X_pred dictionary format
-#     X_pred_conv = pd.DataFrame(dict(
-#             # key=[str(pickup_datetime.strftime('%Y-%m-%d %H:%M:%S UTC'))],
-#             #What to put for key?????
-#             sentiment=[int(sentiment)],
-#             coverage=[int(coverage)],
-#             engagement=[int(engagement)]
-#             ))
+    #convert params into X_pred dictionary format
+    X_pred_conv = pd.DataFrame(dict(
+            # key=[str(pickup_datetime.strftime('%Y-%m-%d %H:%M:%S UTC'))],
+            #What to put for key?????
+            sentiment=[int(sentiment)],
+            coverage=[int(coverage)],
+            engagement=[int(engagement)]
+            ))
 
-    #predict y using X_pred
-    #from taxifare.interface.main import pred
-    #predict = float(pred(X_pred_conv))
+    # predict y using X_pred
+    from taxifare.interface.main import pred
+    predict = float(pred(X_pred_conv))
 
-    #convert prediction into dictionary from numpy array
-    # predict_dict = dict(enumerate(predict.flatten(), 1))
-    #return {'fare_amount' : predict }
+    # convert prediction into dictionary from numpy array
+    predict_dict = dict(enumerate(predict.flatten(), 1))
+    return {'fare_amount' : predict }
 
 app.add_middleware(
     CORSMiddleware,
