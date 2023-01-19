@@ -29,10 +29,11 @@ app = FastAPI()
 def root():
     return {'greeting': 'Hello'}
 
+# @app.get('/input')
+
 #https://medium.com/codex/streamlit-fastapi-%EF%B8%8F-the-ingredients-you-need-for-your-next-data-science-recipe-ffbeb5f76a92
 
-
-
+# @app.get("/calculate")
 def calculate(sentiment: st.slider("Sentiment", 1,5,1),
             coverage: int,
             likes: int,
