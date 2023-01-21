@@ -40,11 +40,11 @@ def calculate(sentiment: st.slider("Sentiment", 1,5,1),
             comments: int,
             retweets: int):
 
-    sentiment = st.slider("Sentiment", 1,5,1)
-    coverage = st.slider("Coverage", 1,5,1)
-    likes = st.slider("Likes", 1,5,1)
-    comments = st.slider("Comments", 1,5,1)
-    retweets = st.slider("Retweets", 1,5,1)
+    sentiment = st.slider("Sentiment", 0,5,1)
+    coverage = st.slider("Coverage", 0,5,1)
+    likes = st.slider("Likes", 0,5,1)
+    comments = st.slider("Comments", 0,5,1)
+    retweets = st.slider("Retweets", 0,5,1)
 
     #convert params into X_pred dictionary format
     X_pred_conv = pd.DataFrame(dict(
