@@ -18,18 +18,12 @@
 
 #uvicorn sports_api.fast:app --reload
 
+import pandas as pd
 import streamlit as st
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-url = http://localhost:8501/
 app = FastAPI()
-
-@app.get("/")
-def root():
-    return {'greeting': 'Hello'}
-
-# @app.get('/input')
 
 #https://medium.com/codex/streamlit-fastapi-%EF%B8%8F-the-ingredients-you-need-for-your-next-data-science-recipe-ffbeb5f76a92
 
@@ -69,3 +63,4 @@ app.add_middleware(
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
 )
+
