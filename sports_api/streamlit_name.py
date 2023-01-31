@@ -11,12 +11,12 @@ import sys, os
 
 
 ##Locate images and csvs from folder and open
-event_name = 'sports_api/' + 'Rainbow Laces' + '.png' ##this should be replaced by our method from the user inputs
+event_name = '../sports_api/' + 'Rainbow Laces' + '.png' ##this should be replaced by our method from the user inputs
 word_cloud = Image.open(event_name)
 
-event_icon = Image.open('sports_api/EFL.png')
-result_table = pd.read_csv('sports_api/test_results_table.csv',  encoding= 'unicode_escape')
-comparison_table = pd.read_csv('sports_api/test_results_table.csv',  encoding= 'unicode_escape')
+event_icon = Image.open('../sports_api/EFL.png')
+result_table = pd.read_csv('../sports_api/test_results_table.csv',  encoding= 'unicode_escape')
+comparison_table = pd.read_csv('../sports_api/test_results_table.csv',  encoding= 'unicode_escape')
 
 # #UI for user input
 st.title("We Like Sports Recommendation")
