@@ -22,7 +22,7 @@ import streamlit as st
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-
+url = http://localhost:8501/
 app = FastAPI()
 
 @app.get("/")
@@ -34,17 +34,11 @@ def root():
 #https://medium.com/codex/streamlit-fastapi-%EF%B8%8F-the-ingredients-you-need-for-your-next-data-science-recipe-ffbeb5f76a92
 
 # @app.get("/calculate")
-def calculate(sentiment: st.slider("Sentiment", 1,5,1),
+def calculate(sentiment: int,
             coverage: int,
             likes: int,
             comments: int,
             retweets: int):
-
-    sentiment = st.slider("Sentiment", 1,5,1)
-    coverage = st.slider("Coverage", 1,5,1)
-    likes = st.slider("Likes", 1,5,1)
-    comments = st.slider("Comments", 1,5,1)
-    retweets = st.slider("Retweets", 1,5,1)
 
     #convert params into X_pred dictionary format
     X_pred_conv = pd.DataFrame(dict(
@@ -57,8 +51,11 @@ def calculate(sentiment: st.slider("Sentiment", 1,5,1),
             retweets=[int(retweets)],
             ))
 
-    #predict y using X_pred
-    #from taxifare.interface.main import pred
+    #select event from backend
+    from "sentiment_analysis_test.main" import select_event
+    result_name = select_event(comments, likes, retweets, sentiment, coverage)
+
+    # taxifare.interface.main import pred
     #predict = float(pred(X_pred_conv))
 
     #convert prediction into dictionary from numpy array
