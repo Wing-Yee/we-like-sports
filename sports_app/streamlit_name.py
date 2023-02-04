@@ -9,8 +9,6 @@ from PIL import Image
 import pandas as pd
 import sys, os
 
-import fast #to link to interaction file
-result_name = fast.result_name
 
 
 ##Locate images and csvs from folder and open
