@@ -9,19 +9,9 @@ from PIL import Image
 import pandas as pd
 import sys, os
 
-#from sentiment_analysis_test import select_event
-
 #path to csv file
-
 abs_csv_path = os.path.join(os.path.dirname(__file__), '../sports_api/sentiment_analysis_score.csv')
 result_table = pd.read_csv(abs_csv_path,  encoding= 'unicode_escape')
-
-
-##Locate images and csvs from folder and open
-event_name = '../sports_api/' + 'Rainbow Laces' + '.png' ##this should be replaced by our method from the user inputs
-word_cloud = Image.open(event_name)
-event_icon = Image.open('../sports_api/EFL.png')
-
 
 
 # #UI for user input
@@ -37,7 +27,6 @@ coverage = st.slider("Coverage", 0,5,1)
 likes = st.slider("Likes", 0,5,1)
 comments = st.slider("Comments", 0,5,1)
 retweets = st.slider("Retweets", 0,5,1)
-
 
 #?sentiment=1&coverage=1&likes=1&comments=1&retweets=1
 
@@ -56,6 +45,14 @@ if st.button('Calculate'):
     response = requests.get(url, params=params)
     return_result = response.json()
     result_name = return_result['event name']
+
+    ##Locate images and csvs from folder and open
+    event_name = '../sports_api/' + result_name + '.png' ##this should be replaced by our method from the user inputs
+    word_cloud = Image.open(event_name)
+
+    logo_name = '../sports_api/' + result_name + ' logo.png'
+    event_icon = Image.open(logo_name)
+
 
     st.subheader(f"Your recommended Sport event is... {result_name} ") #{res.text} ")
 
