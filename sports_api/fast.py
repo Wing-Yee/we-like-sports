@@ -19,13 +19,19 @@
 #uvicorn sports_api.fast:app --reload
 
 import pandas as pd
+import csv
+import os
 import streamlit as st
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sports_api.sentiment_analysis_test import select_event
 
 #load dataframe with results
-df2 = list(csv.DictReader('sentiment_analysis_score.csv'))
+#path to csv file
+abs_csv_path = os.path.join(os.path.dirname(__file__), '../sports_api/sentiment_analysis_score.csv')
+df2 = pd.read_csv(abs_csv_path,  encoding= 'unicode_escape')
+
+print(df2)
 
 app = FastAPI()
 
@@ -49,7 +55,7 @@ def calculate(sentiment: int,
             retweets: int):
 
     #select event from backend
-    result_name = select_event(comments, likes, retweets, sentiment, coverage)
+    result_name = select_event(comments, likes, retweets, sentiment, coverage, df2)
 
     #convert prediction into dictionary from numpy array
     # predict_dict = dict(enumerate(predict.flatten(), 1))
