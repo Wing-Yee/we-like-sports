@@ -8,3 +8,4 @@ pytest-asyncio  # asynchronous I/O support for pytest
 
 streamlit       #front end
 tweepy          #twitter processing
+scikit-learn    #for data scaling
