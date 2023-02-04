@@ -22,39 +22,38 @@ import pandas as pd
 import streamlit as st
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from sports_api.sentiment_analysis_test import select_event
+
+#load dataframe with results
+df2 = list(csv.DictReader('sentiment_analysis_score.csv'))
 
 app = FastAPI()
 
-#https://medium.com/codex/streamlit-fastapi-%EF%B8%8F-the-ingredients-you-need-for-your-next-data-science-recipe-ffbeb5f76a92
+@app.get("/")
+def root():
+    # $CHA_BEGIN
+    return dict(greeting="Hello")
+    # $CHA_END
 
-# @app.get("/calculate")
+
+#@app.post("/check")
+#def foo(file: UploadFile):
+#    df = pd.read_csv(file.file)
+#    return len(df)
+
+@app.get("/calculate")
 def calculate(sentiment: int,
             coverage: int,
             likes: int,
             comments: int,
             retweets: int):
 
-    #convert params into X_pred dictionary format
-    X_pred_conv = pd.DataFrame(dict(
-            # key=[str(pickup_datetime.strftime('%Y-%m-%d %H:%M:%S UTC'))],
-            #What to put for key?????
-            sentiment=[int(sentiment)],
-            coverage=[int(coverage)],
-            likes=[int(likes)],
-            comments=[int(comments)],
-            retweets=[int(retweets)],
-            ))
-
     #select event from backend
-    from "sentiment_analysis_test.main" import select_event
     result_name = select_event(comments, likes, retweets, sentiment, coverage)
-
-    # taxifare.interface.main import pred
-    #predict = float(pred(X_pred_conv))
 
     #convert prediction into dictionary from numpy array
     # predict_dict = dict(enumerate(predict.flatten(), 1))
-    return {'fare_amount' : 'hold' }
+    return {'event name' : str(result_name) }
 
 app.add_middleware(
     CORSMiddleware,
@@ -63,4 +62,3 @@ app.add_middleware(
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
 )
-
