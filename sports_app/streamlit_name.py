@@ -1,5 +1,5 @@
 ##once youve loaded fastpy open another tab
-# streamlit run streamlit_name.py
+# streamlit run sports_app/streamlit_name.py
 
 import streamlit as st
 import numpy as np #use to convert image
@@ -41,18 +41,17 @@ if st.button('Calculate'):
     'retweets':retweets,
     }
 
-    url = 'http://127.0.0.1:8009/calculate'
+    url = 'http://127.0.0.1:8000/calculate'
     response = requests.get(url, params=params)
     return_result = response.json()
     result_name = return_result['event name']
 
     ##Locate images and csvs from folder and open
-    event_name = '../sports_api/' + result_name + '.png' ##this should be replaced by our method from the user inputs
+    event_name = os.path.join(os.path.dirname(__file__), f'../sports_api/{result_name}.png')
     word_cloud = Image.open(event_name)
 
-    logo_name = '../sports_api/' + result_name + ' logo.png'
+    logo_name = os.path.join(os.path.dirname(__file__), f'../sports_api/{result_name} logo.png')
     event_icon = Image.open(logo_name)
-
 
     st.subheader(f"Your recommended Sport event is... {result_name} ") #{res.text} ")
 
