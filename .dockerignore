@@ -1,0 +1,7 @@
+.ipynb*
+*.pyc
+Cleaned Data
+raw data
+*.ipynb
+*.xlsx
+__*
